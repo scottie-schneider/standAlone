@@ -1,8 +1,8 @@
 {
   "name": "treehouse-express-auth",
   "version": "1.0.0",
-  "description": "Stand Alone portal for managing applications",
-  "author": "Scottie Schneider and team",
+  "description": "Stand alone application tracker.",
+  "author": "White Rabbit",
   "private": true,
   "scripts": {
     "start": "node ./app"
@@ -16,4 +16,5 @@
     "mongoose": "^4.5.0",
     "pug": "^2.0.0-beta2"
   },
+  "license": "MIT"
 }
