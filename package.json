@@ -1,0 +1,19 @@
+{
+  "name": "treehouse-express-auth",
+  "version": "1.0.0",
+  "description": "Stand Alone portal for managing applications",
+  "author": "Scottie Schneider and team",
+  "private": true,
+  "scripts": {
+    "start": "node ./app"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.13.3",
+    "connect-mongo": "^1.2.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mongoose": "^4.5.0",
+    "pug": "^2.0.0-beta2"
+  },
+}
