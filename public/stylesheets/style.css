@@ -2,7 +2,7 @@
 /* Base Styles */
 
 body {
-	background: #1d2a33 url('../images/bg.jpg') no-repeat;
+	background: #1d2a33 url("../images/unicorn.png") no-repeat;
 	background-size: cover; 
 }
 
@@ -22,6 +22,8 @@ a:hover {
 .main {
 	color: #fff;
 	min-height: calc(100vh - 34px);
+	background: transparent;
+	background-size: cover; 
 }
 .foot {
 	font-size: .85rem;

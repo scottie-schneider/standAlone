@@ -6,20 +6,45 @@ block content
       h1.display-4.m-b-2 Sign Up
       
       // register form
-      form(method='POST' action='/register')
+      form#superForm(method='POST' action='/register')
         div.form-group
-          label(for='name') Name:
-          input#name.form-control(type='text', placeholder='first and last' name='name')
+          label(for='firstName') First Name:
+          input#firstName.form-control(type='text', placeholder='First name here!' name='firstName')
+        div.form-group
+          label(for='middleName') Middle Name:
+          input#middleName.form-control(type='text', placeholder='Middle name here!' name='middleName')
+        div.form-group
+          label(for='lastName') Last Name:
+          input#lastName.form-control(type='text', placeholder='Last name here!' name='lastName')
+        div.form-group
+          label(for='contactPhone') Contact Phone:
+          input#contactPhone.form-control(type='text', placeholder='Contact phone here' name='contactPhone')
         div.form-group
           label(for='email') Email:
           input#email.form-control(type='email', placeholder='name@email.com' name='email')
         div.form-group
-          label(for='favoriteBook') Favorite Book:
-          input#favoriteBook.form-control(type='text', placeholder='title of book' name='favoriteBook')
+          label(for='address') Address (number and street)
+          input#address.form-control(type='text', placeholder='Your Address' name='address')
+        div.form-group
+          label(for='zip') Zip Code:
+          input#zip.form-control(type='text', placeholder='Zip Code' name='zip')
+        div.form-group
+          label(for='city') City
+          input#city.form-control(type='text', placeholder='City' name='city')
+        div.form-group
+          label(for='state') State:
+          input#state.form-control(type='text', placeholder='Your state' name='state')
         div.form-group
           label(for='pw') Password:
           input#pw.form-control(type='password' name='password')
         div.form-group
           label(for='pw2') Confirm Password:
           input#pw2.form-control(type='password' name='confirmPassword')
+        label I identify as:
+        - const choices = ['LBGTQ+', 'Military Veteran', 'Disabled', 'Female']
+        ul.tags 
+          each choice in choices
+            .tag.tag__choice
+              input(type="checkbox" id=choice value=choice name="tags" class="checks")
+              label(for=choice)= choice
         button.btn.btn-primary(type='submit') Sign up

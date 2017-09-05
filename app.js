@@ -6,14 +6,14 @@ var MongoStore = require('connect-mongo')(session);
 var app = express();
 
 // mongodb connection
-mongoose.connect("mongodb://localhost:27017/bookworm");
+mongoose.connect("mongodb://stand:alone@ds125994.mlab.com:25994/standalone");
 var db = mongoose.connection;
 // mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
 
 // use sessions for tracking logins
 app.use(session({
-  secret: 'treehouse loves you',
+  secret: 'Scottie loves you',
   resave: true,
   saveUninitialized: false,
   store: new MongoStore({
@@ -47,6 +47,7 @@ app.use(function(req, res, next) {
   var err = new Error('File Not Found');
   err.status = 404;
   next(err);
+  res.render('404');
 });
 
 // error handler

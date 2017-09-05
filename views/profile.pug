@@ -6,6 +6,12 @@ block content
       .col-md-8.col-md-offset-2
         h1.display-4
           img.avatar.img-circle.hidden-xs-down(src='/images/avatar.png', alt='avatar')
-          | #{name}
-        h2.favorite-book Favorite Book
-        | #{favorite}
+          | Hello, #{name}!
+        h2.applicationStatus Your Application Status:
+        | #{status}
+        h2.groups Your groups:
+        - const choices = tags
+        ul.tags 
+          each choice in choices
+            li= choice
+
