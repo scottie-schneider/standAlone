@@ -1,16 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var Applicant = require('../models/Applicant');
+var User = require('../models/Applicant');
 var mid = require('../middleware');
 
 // GET /profile
 router.get('/profile', mid.requiresLogin, function(req, res, next) {
-  Applicant.findById(req.session.userId)
-      .exec(function (error, applicant) {
+  User.findById(req.session.userId)
+      .exec(function (error, user) {
         if (error) {
           return next(error);
         } else {
-          return res.render('profile', { title: 'Profile', name: applicant.firstName, status: applicant.status, tags: applicant.tags});
+          return res.render('profile', { title: 'Profile', name: user.firstName, status: user.status, tags: user.tags });
         }
       });
 });
@@ -33,11 +33,11 @@ router.get('/logout', function(req, res, next) {
 router.get('/login', mid.loggedOut, function(req, res, next) {
   return res.render('login', { title: 'Log In'});
 });
+
 // POST /login
 router.post('/login', function(req, res, next) {
   if (req.body.email && req.body.password) {
-    console.log(req.body);
-    Applicant.authenticate(req.body.email, req.body.password, function (error, user) {
+    User.authenticate(req.body.email, req.body.password, function (error, user) {
       if (error || !user) {
         var err = new Error('Wrong email or password.');
         err.status = 401;
@@ -56,13 +56,11 @@ router.post('/login', function(req, res, next) {
 
 // GET /register
 router.get('/register', mid.loggedOut, function(req, res, next) {
-  console.log(req.body)
   return res.render('register', { title: 'Sign Up' });
 });
 
 // POST /register
 router.post('/register', function(req, res, next) {
-  console.log(req.body);
   if (req.body.firstName &&
     req.body.middleName &&
     req.body.lastName &&
@@ -81,8 +79,7 @@ router.post('/register', function(req, res, next) {
         err.status = 400;
         return next(err);
       }
-      
-      
+
       // create object with form input
       var userData = {
         firstName: req.body.firstName,
@@ -99,11 +96,10 @@ router.post('/register', function(req, res, next) {
       };
 
       // use schema's `create` method to insert document into Mongo
-      Applicant.create(userData, function (error, user) {
+      User.create(userData, function (error, user) {
         if (error) {
           return next(error);
         } else {
-          console.log(user);
           req.session.userId = user._id;
           return res.redirect('/profile');
         }

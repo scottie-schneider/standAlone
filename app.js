@@ -6,7 +6,9 @@ var MongoStore = require('connect-mongo')(session);
 var app = express();
 
 // mongodb connection
-mongoose.connect("mongodb://stand:alone@ds125994.mlab.com:25994/standalone");
+mongoose.connect("mongodb://stand:alone@ds125994.mlab.com:25994/standalone", {
+  useMongoClient: true
+});
 var db = mongoose.connection;
 // mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -47,13 +49,15 @@ app.use(function(req, res, next) {
   var err = new Error('File Not Found');
   err.status = 404;
   next(err);
-  res.render('404');
 });
 
 // error handler
 // define as the last app.use callback
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+  if(err.status === 404){
+    return res.render('404');
+  }
   res.render('error', {
     message: err.message,
     error: {}
