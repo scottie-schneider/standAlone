@@ -5,7 +5,8 @@
   "author": "White Rabbit",
   "private": true,
   "scripts": {
-    "start": "node ./app"
+    "start": "node ./app.js",
+    "dev": "node ./app"
   },
   "dependencies": {
     "bcrypt": "^0.8.7",
