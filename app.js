@@ -5,11 +5,16 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var app = express();
 
+// import environmental variables from our variables.env file
+require('dotenv').config({ path: 'variables.env' });
 
-// mongodb connection
-mongoose.connect("mongodb://stand:alone@ds125994.mlab.com:25994/standalone", {
-  useMongoClient: true
+// Connect to our Database and handle an bad connections
+mongoose.connect(process.env.DATABASE);
+mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
+mongoose.connection.on('error', (err) => {
+  console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
+
 var db = mongoose.connection;
 // mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -65,7 +70,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// listen on port 3000
-app.listen(3000, function () {
-  console.log('Express app listening on port 3000');
+app.set('port', process.env.PORT || 7777);
+const server = app.listen(app.get('port'), () => {
+  console.log(`Express running → PORT ${server.address().port}`);
 });
