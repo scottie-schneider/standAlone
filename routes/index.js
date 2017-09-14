@@ -112,6 +112,16 @@ router.post('/register', function(req, res, next) {
     }
 })
 
+// GET update profile
+router.get('/update', function(req, res, next){
+  console.dir(req.session.userId);
+  User.findById(req.session.userId, function(err, user){
+    console.log(`user is ${user}`)
+  })
+  return res.render('update');
+  next();
+})
+
 // GET /
 router.get('/', function(req, res, next) {
   return res.render('index', { title: 'Home' });
